@@ -20,20 +20,20 @@ class Forker {
     *            each callback as the value.
     *
     * Example:
-    *    $results = Forker::forkMe($things, function ($index, $thing) {
+    *    $results = Forker::map($things, function ($index, $thing) {
     *       // Some expensive operation
     *       return calculateNewThing($thing);
     *    });
     */
-   public static function forkMeSerialized($things, $callback) {
-      $outputStrings = self::forkMe($things,
+   public static function map($things, $callback) {
+      $outputStrings = self::mapStream($things,
       function($key, $value, $stream) use ($callback){
          $data = $callback($key, $value);
          fwrite($stream, serialize($data));
       });
 
       $results = array();
-      foreach ($outputStringis as $key => $output) {
+      foreach ($outputStrings as $key => $output) {
          if ($output === null || $output === '')
             $results[$key] = null;
          else
@@ -45,9 +45,9 @@ class Forker {
    /**
     * Forks the process count($things) times and executes the callback on each
     * entry in $things, all in parallel. Passes a stream to each callback and
-    * collects and returns the output from each stream.
+    * collects and returns the string output from each stream.
     */
-   protected static function forkMe($things, $callback) {
+   protected static function mapStream($things, $callback) {
       $children = array();
 
       foreach($things as $key => $value) {
