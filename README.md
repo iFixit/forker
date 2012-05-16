@@ -1,5 +1,6 @@
 Forker
 ------
+[![Build Status](https://secure.travis-ci.org/iFixit/forker.png?branch=master)](http://travis-ci.org/iFixit/forker)
 
 Forker presents a simple interfacing for forking in PHP.
 
