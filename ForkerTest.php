@@ -37,13 +37,10 @@ class ForkerTest extends PHPUnit_Framework_TestCase {
 
    public function testActuallyForking() {
       $things   = array(1,2,3,4);
-      $time = microtime(true);
-      Forker::map($things, function($key, $value) {
-         usleep(100000);
-         return $value;
+      $pids = Forker::map($things, function($key, $value) {
+         return getmypid();
       });
-      $totalTime = microtime(true) - $time;
-      $this->assertLessThan(120000, $totalTime);
+      $this->assertSame($pids, array_unique($pids));
    }
 }
 
