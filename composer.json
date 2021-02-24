@@ -1,0 +1,7 @@
+{
+   "name": "ifixit/forker",
+   "description": "A simple interface for executing N things in parallel using forking and returning results.",
+   "require-dev": {
+      "phpunit/phpunit": "^9"
+   }
+}
