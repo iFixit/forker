@@ -5,7 +5,7 @@ require("Forker.php");
 /**
  * Designed to work with PHPUnit
  */
-class ForkerTest extends PHPUnit_Framework_TestCase {
+class ForkerTest extends \PHPUnit\Framework\TestCase {
    public function testMapForInts() {
       $things   = array(1,2,3,4);
       $expected = array(2,4,6,8);
